@@ -70,6 +70,9 @@ trait Privilege{
             case 'emails':
                 return 'manage_email_sending';
                 break;
+            case 'modify_state':
+                return 'modify_state';
+                break;
             default:
                 return '';
                 break;

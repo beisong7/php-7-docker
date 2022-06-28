@@ -1,4 +1,3 @@
-# PHP development environment with PHP-FPM, Nginx and MySQL to run Laravel applications using Docker and Docker Compose
 
 You need to have Docker and Docker Compose installed on your server to proceed using this PHP environment.
 

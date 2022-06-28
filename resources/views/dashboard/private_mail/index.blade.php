@@ -1,5 +1,5 @@
 <?php
-    $sidenav['mail_list'] = 'active';
+    $sidenav['private_mail'] = 'active';
 ?>
 @extends('layouts.app')
 
@@ -113,4 +113,8 @@
 
     <script src="{{ asset('assets/js/pages/profile.js') }}"></script>
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> dev
