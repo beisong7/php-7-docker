@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder
                 'email'=>'test@app.com',
                 'password'=>bcrypt('password'),
                 'email_verified_at'=>now(),
+                'active'=>1
             ]
         );
     }

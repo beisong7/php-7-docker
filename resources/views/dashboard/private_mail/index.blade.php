@@ -1,5 +1,5 @@
 <?php
-    $sidenav['mail_list'] = 'active';
+    $sidenav['private_mail'] = 'active';
 ?>
 @extends('layouts.app')
 
