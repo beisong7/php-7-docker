@@ -20,9 +20,9 @@ class UnsubscribeController extends Controller
             DB::beginTransaction();
             Unsubscribe::create($data);
             DB::commit();
-            return redirect('http://nyccng.org');
+            return redirect('https://irecharge.ng');
         }catch (\Exception $e){
-            return redirect('http://nyccng.org');
+            return redirect('https://irecharge.ng');
         }
     }
 }
