@@ -113,8 +113,4 @@
 
     <script src="{{ asset('assets/js/pages/profile.js') }}"></script>
 
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> dev
