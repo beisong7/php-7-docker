@@ -20,6 +20,7 @@ class CreateEmailsTable extends Migration
             $table->string('from')->nullable();
             $table->string('subject')->nullable();
             $table->string('title')->nullable();
+            $table->string('sender')->nullable();
             $table->string('recipient')->nullable();
             $table->longText('body')->nullable();
             $table->boolean('active')->nullable();

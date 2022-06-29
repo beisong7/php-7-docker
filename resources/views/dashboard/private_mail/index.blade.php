@@ -1,5 +1,5 @@
 <?php
-    $sidenav['mail_list'] = 'active';
+    $sidenav['private_mail'] = 'active';
 ?>
 @extends('layouts.app')
 
@@ -56,7 +56,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="media align-items-center">
-                                                        <h6 class="mb-0">{{ !empty($email->sender)?$email->sender:'NYCC Membership' }}</h6>
+                                                        <h6 class="mb-0">{{ !empty($email->sender)?$email->sender:'Org Name' }}</h6>
                                                     </div>
                                                 </td>
                                                 <td>{{ $email->subject }}</td>
@@ -113,4 +113,8 @@
 
     <script src="{{ asset('assets/js/pages/profile.js') }}"></script>
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> dev

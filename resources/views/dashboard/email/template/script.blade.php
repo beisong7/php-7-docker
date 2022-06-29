@@ -165,7 +165,7 @@
                                     <tr>
                                     <td align='center' class='masthead'>
                                     <div class="" style="width: 30%">
-                                    <img src='https://www.nyccng.org/images/nycc_logo2.png' alt="nycc logo" style="width: 100%">
+                                    <img src='https://www.irecharge.ng/images/irechargenormallogo.svg' alt="logo" style="width: 100%">
                                     </div>
 
                                     <br>
@@ -194,7 +194,7 @@
                                     <table>
                                     <tr>
                                     <td class='content footer' align='center'>
-                                    <p>Sent by <a href='https://nyccng.org' target="_blank">nyccng.org</a>, Nigeria</p>
+                                    <p>Sent by <a href='https://irecharge.ng' target="_blank">irecharge.ng</a>, Nigeria</p>
                                     </td>
                                     </tr>
                                     </table>

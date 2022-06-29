@@ -38,8 +38,8 @@
                                                 <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject" autocomplete="off" required value="{{ old('subject') }}">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="sender">Email Sender ('NYCC Membership' if left blank)</label>
-                                                <input type="text" name="sender" class="form-control" id="sender" placeholder="NYCC Membership" autocomplete="off" required value="{{ old('sender') }}">
+                                                <label for="sender">Email Sender ('Name' if left blank)</label>
+                                                <input type="text" name="sender" class="form-control" id="sender" placeholder="Your Name" autocomplete="off" required value="{{ old('sender') }}">
                                             </div>
                                         </div>
                                         <div class="form-row">

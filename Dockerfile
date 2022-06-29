@@ -11,8 +11,18 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libzip-dev \
     zip \
-    unzip
+    unzip \
+    
+    && docker-php-ext-install zip
+
+
+# Install supervisor
+RUN apt-get install -y supervisor
+
+# Install vim for debugging purposes
+RUN apt-get install -y vim
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -21,7 +31,13 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
@@ -42,6 +58,8 @@ RUN chmod -R ugo+rw /var/www/storage
 # Laravel Error Log Permission
 RUN chmod 777 /var/www/storage
 
+RUN composer self-update --1
+
 COPY .env.example /var/www/.env
 
 # Deployment steps
@@ -49,6 +67,11 @@ RUN composer install --optimize-autoloader --dev
 
 RUN php artisan key:generate
 
-EXPOSE 80
+RUN chmod 777 /var/www/docker
+
+# RUN chmod +x /var/www/docker/run.sh
 
 USER $user
+
+EXPOSE 80
+# ENTRYPOINT ["/var/www/docker/run.sh"]

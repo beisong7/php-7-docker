@@ -63,7 +63,7 @@ return [
             ]) : [],
         ],
 
-        'nycc_site' => [
+        'site' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('NYS_DB_HOST', '127.0.0.1'),
