@@ -13,7 +13,7 @@ trait UnsubLink{
             $key = $this->my_encrypt($email);
             return route('unsubscribe', $key);
         }catch (\Exception $e){
-            return "http://nyccng.org";
+            return "https://irecharge.ng";
         }
 
     }

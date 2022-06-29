@@ -35,7 +35,7 @@ class ProcessRecipientService
             'body'=>$body
         ];
 
-        $title = !empty($email->sender)?$email->sender:'NYCC Membership';
+        $title = !empty($email->sender)?$email->sender:'Org Name';
 
         //check if item is in unsubscribe list
         $fail_send = Unsubscribe::where('email', $email)->first();
@@ -57,7 +57,7 @@ class ProcessRecipientService
         $data = [
             'body'=>$body
         ];
-        $title = !empty($email->sender)?$email->sender:'NYCC Membership';
+        $title = !empty($email->sender)?$email->sender:'Org Name';
 
         $fail_send = Unsubscribe::where('email', $email->recipient)->first();
         if(empty($fail_send)){

@@ -40,6 +40,7 @@ class MemberService
                     if(is_array($mail_lists)){
                         foreach ($mail_lists as $list_key){
                             $list = MailListService::find($list_key, 'import_key');
+                            // UPDATE THE ABOVE QUERY TO DB::RAW FOR PERFORMANCE
                             if(!empty($list)){
                                 MailListService::addToList($list->uuid, $email, $first_name);
                             }
@@ -60,6 +61,8 @@ class MemberService
     public static function createMember($first_name, $last_name, $email){
         //check if exist already
         $exist = Member::where('email', $email)->first();
+        // UPDATE THE ABOVE ELOQUENT TO DB::RAW QUERY FOR PERFORMANCE
+
         if(empty($exist)){
             return Member::create(
                 [
