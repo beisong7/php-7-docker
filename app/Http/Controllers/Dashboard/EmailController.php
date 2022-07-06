@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Email;
 use App\Models\EmailTemplate;
+use App\Models\Group;
 use App\Models\MailList;
+use App\Services\Newsletter\NewsletterService;
 use App\Traits\General\Utility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -196,5 +198,43 @@ class EmailController extends Controller
             return back()->withMessage($msg);
         }
         return back()->withErrors(['Resource not found.']);
+    }
+
+    /**
+     * Create newsletter
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function newsletter(){
+        $templates = EmailTemplate::select(['title', 'body'])->orderBy('updated_at', 'desc')->get();
+        $dTemplate = EmailTemplate::where('current', true)->first();
+        $groups = Group::get();
+        $template = " ";
+        if(!empty($dTemplate)){
+            $template=$dTemplate->body;
+        }
+
+        return view('dashboard.email.create_newsletter')->with([
+            'templates'=>$templates,
+            'template'=>$template,
+            'groups'=>$groups
+        ]);
+    }
+
+    public function createNewsletter(Request $request){
+//        dd($request->all());
+        $request->validate([
+            'subject'=>'required',
+            'title'=>'required',
+            'body'=>'required',
+            'hour'=>'required',
+            'minutes'=>'required',
+        ]);
+        $res = NewsletterService::createNewsletter($request);
+        if($res){
+            return redirect()->route('email.index')->withMessage("New newsletter created");
+        }
+        return back()->withErrors(['Could not complete. Try again'])->withInput();
+
+
     }
 }

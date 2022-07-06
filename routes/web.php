@@ -19,6 +19,11 @@ Route::group(['middleware'=>'accessed'], function () {
     Route::get('email/pop/{id}', 'Dashboard\EmailController@pop')->name('email.pop');
     Route::get('email/status-toggle/{id}', 'Dashboard\EmailController@toggle')->name('email.toggle');
 
+    Route::get('email/newsletter/create', 'Dashboard\EmailController@newsletter')->name('email.newsletter');
+    Route::post('email/newsletter/create', 'Dashboard\EmailController@createNewsletter')->name('email.create.newsletter');
+
+
+
     Route::resource('maillist', 'Dashboard\MailListController');
 
     Route::get('mail-list/add-recipient/{id}', 'Dashboard\MailListController@addRecipient')->name('mail.list.add_recipient');
@@ -59,6 +64,8 @@ Route::group(['middleware'=>'accessed'], function () {
 
     //MEMBERS
     Route::get('members', 'Dashboard\MemberController@index')->name('member.index');
+    Route::get('member/create', 'Dashboard\MemberController@create')->name('member.create');
+    Route::post('member', 'Dashboard\MemberController@store')->name('member.store');
 
     //DATA CHART
     Route::get('/get-chart-data', 'Dashboard\ChartController@respond');
@@ -91,6 +98,12 @@ Route::group(['middleware'=>'accessed'], function () {
     Route::get('automate/stage/edit/{uuid}', 'Automate\StageController@stageEdit')->name('automate.stage.edit');
     Route::post('automate/stage/update/{uuid}', 'Automate\StageController@stageUpdate')->name('automate.stage.update');
     Route::get('automate/stage/delete/{uuid}', 'Automate\StageController@stageDelete')->name('automate.stage.delete');
+
+    Route::resource('groups','Dashboard\GroupController');
+    Route::post('groups/add/members','Dashboard\GroupController@prepForGroup')->name('add.to.group');
+    Route::get('group/{id}/delete','Dashboard\GroupController@delete')->name('group.pop');
+    Route::get('group/{id}/members','Dashboard\GroupController@members')->name('group.members');
+    Route::get('group/{id}/remove/{member_id}/member','Dashboard\GroupController@removeMember')->name('group.remove.member');
 
 
 });

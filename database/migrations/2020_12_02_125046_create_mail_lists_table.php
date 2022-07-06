@@ -29,19 +29,19 @@ class CreateMailListsTable extends Migration
             $table->bigInteger('time')->nullable(); // 60 mins format
             $table->integer('round')->nullable(); //
             $table->boolean('sunday')->nullable(); //
-            $table->boolean('sunday_run')->nullable(); //
+            $table->boolean('sunday_run')->default(false); //
             $table->boolean('monday')->nullable(); //
-            $table->boolean('monday_run')->nullable(); //
+            $table->boolean('monday_run')->default(false); //
             $table->boolean('tuesday')->nullable(); //
-            $table->boolean('tuesday_run')->nullable(); //
+            $table->boolean('tuesday_run')->default(false); //
             $table->boolean('wednesday')->nullable(); //
-            $table->boolean('wednesday_run')->nullable(); //
+            $table->boolean('wednesday_run')->default(false); //
             $table->boolean('thursday')->nullable(); //
-            $table->boolean('thursday_run')->nullable(); //
+            $table->boolean('thursday_run')->default(false); //
             $table->boolean('friday')->nullable(); //
-            $table->boolean('friday_run')->nullable(); //
+            $table->boolean('friday_run')->default(false); //
             $table->boolean('saturday')->nullable(); //
-            $table->boolean('saturday_run')->nullable(); //
+            $table->boolean('saturday_run')->default(false); //
             $table->boolean('active')->nullable();
             $table->timestamps();
         });

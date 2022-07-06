@@ -9,7 +9,7 @@
     <title>{{ config('app.name', '') }} |  @yield('pate_title', 'Home')</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ url('img/favicon.png') }}">
+    <link rel="icon" href="{{ url('img/logo.png') }}">
 
     <!-- page css -->
 

@@ -34,20 +34,19 @@
                 <div class="row" id="list-view">
                     <div class="col-md-12">
                         @include('layouts.notice')
+                        <?php $info = $data->toArray() ?>
+                        @if(!empty($info['from']))
+                            <b>
+                                Showing : {{ !empty($info['from'])?$info['from']:0 }} - {{ !empty($info['to'])?$info['to']:0 }} <i class="ml-3 mr-3"> of </i> {{ $info['total'] }}
+                            </b>
+
+                        @else
+                            No Result
+                        @endif
                         <div class="card">
                             <div class="card-body">
-                                <?php $info = $data->toArray() ?>
-                                @if(!empty($info['from']))
-                                    <b>
-                                        Showing : {{ !empty($info['from'])?$info['from']:0 }} - {{ !empty($info['to'])?$info['to']:0 }} <i class="ml-3 mr-3"> of </i> {{ $info['total'] }}
-                                    </b>
-
-                                @else
-                                    No Result
-                                @endif
-
                                 <form action="{{ route('member.index') }}" method="get" class="ml-3 float-right" style="display: inline-flex;">
-                                    <input type="hidden" name="type" value="{{ @$type }}">
+
                                     <button class="btn btn-sm btn-default" disabled="disabled">From</button>
                                     <input type="date" name="start" value="{{ @$start }}" class="form-control mr-3" style="width: 170px">
                                     <button class="btn btn-sm btn-default" disabled="disabled">To</button>
@@ -55,24 +54,10 @@
                                     <button class="btn btn-sm btn-primary" type="submit" data-toggle="tooltip" data-placement="top" title="Update current type with date of registration selected">Update</button>
                                 </form>
 
-                                <div class="btn-group float-right" role="group" aria-label="Button group with nested dropdown">
-                                    <div class="btn-group" role="group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            TYPE <i class="mdi mdi-chevron-down ml-1"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <a href="{{ route('member.index') }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="All accounts, no date filter"> All (clear) </a>
-                                            <a href="{{ route('member.index', ['start'=>@$start, 'end'=>@$end]) }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="All accounts"> All </a>
-                                            <a href="{{ route('member.index', ['type'=>'active', 'start'=>@$start, 'end'=>@$end]) }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="All accounts with email verified"> Active </a>
-                                            <a href="{{ route('member.index', ['type'=>'inactive', 'start'=>@$start, 'end'=>@$end]) }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="All yet to verify email"> Inactive </a>
-                                            <a href="{{ route('member.index', ['type'=>'member', 'start'=>@$start, 'end'=>@$end]) }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="All accounts that has made payment"> Member </a>
-                                            <a href="{{ route('member.index', ['type'=>'non member', 'start'=>@$start, 'end'=>@$end]) }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="All accounts with no membership"> Non - Member </a>
-                                            <a href="{{ route('member.index', ['type'=>'v non-member', 'start'=>@$start, 'end'=>@$end]) }}" class="dropdown-item" data-toggle="tooltip" data-placement="top" title="non member email Verified"> V-Non-Member </a>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-primary btn-tone" data-toggle="modal" data-target="#addToList">
+                                <div>
+                                    <button type="button" class="btn btn-primary btn-tone" data-toggle="modal" data-target="#createMember">
                                         <i class="anticon anticon-plus"></i>
-                                        <span class="m-l-5">Add To List</span>
+                                        <span class="m-l-5">Create Member</span>
                                     </button>
 
 {{--                                    <a  type="button" href="{{ route('add_recipient.from-search', ['type'=>@$type, 'start'=>@$start,'end'=>@$end]) }}" class="btn btn-primary " data-toggle="tooltip" data-placement="top" title="Download Selected Type">Download </a>--}}
@@ -88,8 +73,7 @@
                                         <tr>
                                             <th>Names</th>
                                             <th>Email</th>
-                                            <th>Registered</th>
-                                            <th>Status</th>
+                                            <th>Created</th>
                                             <th class="text-right">Action</th>
                                         </tr>
                                         </thead>
@@ -103,28 +87,17 @@
                                                 </td>
                                                 <td>{{ $member->email }}</td>
                                                 <td>{{ date('F d, Y', strtotime($member->created_at)) }}</td>
-                                                <td>{{ $member->trueStatus }}</td>
                                                 <td class="text-right">
 
-                                                    <a href="{{ route('member.to-list', $member->uuid) }}" class="btn btn-success btn-tone doload">
-                                                        <!--
-                                                        data-toggle="modal" data-target="#addMemberToList"
-                                                         -->
+                                                    <a href="#" class="btn btn-success btn-tone doload" data-mid="{{ $member->uuid }}">
                                                         <i class="anticon anticon-plus"></i>
-                                                        <span class="m-l-5">Add To List</span>
+                                                        <span class="m-l-5">Add To Group</span>
                                                     </a>
-                                                    {{--
-                                                    <a href="#" class="btn btn-primary btn-tone">
-                                                        <i class="anticon anticon-mail"></i>
-                                                        <span class="m-l-5">Send Email</span>
-                                                    </a>
-                                                    --}}
-
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5">
+                                                <td colspan="4">
                                                     <h6 class="text-center">No Entries yet</h6>
                                                 </td>
                                             </tr>
@@ -151,27 +124,51 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="addToList">
+
+    <div class="modal fade" id="createMember">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Select List</h5>
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Create Member</h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <i class="anticon anticon-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
 
-                    @foreach($lists as $list)
-                        <b class="text-uppercase">{{ $list->title }}</b>
-                        <small class="badge badge-dark">{{ $list->type }}</small>
+                    <div class="">
+                        <form action="{{ route('member.store') }}" method="post">
+                            @csrf
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="fn">First Name *</label>
+                                    <input type="text" name="first_name" class="form-control" id="fn" placeholder="First Name" autocomplete="off" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ln">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" id="ln" placeholder="Last Name" autocomplete="off">
+                                </div>
 
-                        <a href="{{ route('add_recipient.from-search', ['id'=>$list->uuid, 'type'=>@$type, 'start'=>@$start,'end'=>@$end]) }}" class="btn btn-primary btn-tone float-right">
-                            <i class="anticon anticon-plus"></i>
-                            <span class="m-l-5">Add Here</span>
-                        </a>
-                        <hr>
-                    @endforeach
+                                <div class="form-group col-md-6">
+                                    <label for="em">Email Address *</label>
+                                    <input type="email" name="email" class="form-control" id="title" placeholder="Email Address" autocomplete="off" required>
+                                </div>
+
+                                <div class="col-12"></div>
+
+                                @foreach($groups as $group)
+                                    <div class="form-group col-md-6">
+                                        <div class="checkbox">
+                                            <input id="{{ $group->name }}CB" type="checkbox" name="group[]" value="{{ $group->uuid }}">
+                                            <label for="{{ $group->name }}CB">{{ $group->name }}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -181,7 +178,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addMemberToList">
+    <div class="modal fade" id="addMemberToGroup">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -191,7 +188,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center">Loading...</p>
+                    <form action="{{ route('add.to.group') }}" method="post" id="inject_member">
+                        @csrf
+                        <div class="form-row">
+                            @foreach($groups as $group)
+                                <div class="form-group col-md-6">
+                                    <div class="checkbox">
+                                        <input id="{{ $group->name }}VV" type="checkbox" name="selection[]" value="{{ $group->uuid }}">
+                                        <label for="{{ $group->name }}VV">{{ $group->name }}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add</button>
+
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -203,10 +216,17 @@
     <script>
         $('.doload').on('click', function(e){
             e.preventDefault();
-            let modal_body = $('#addMemberToList').modal('show').find('.modal-body');
-            modal_body.children().remove();
-            modal_body.append(`<p class="text-center">Loading...</p>`);
-            modal_body.load($(this).attr('href'));
+            // $('#addMemberToGroup').modal('show');
+
+            let modal_body = $('#addMemberToGroup').modal('show');
+            modal_body
+                .find('#inject_member')
+                .append(`<input type="hidden" name="member_id" value="${$(this).attr('data-mid')}" />`);
+
+            // let modal_body = $('#addMemberToGroup').modal('show').find('.modal-body');
+            // modal_body.children().remove();
+            // modal_body.append(`<p class="text-center">Loading...</p>`);
+            // modal_body.load($(this).attr('href'));
         });
     </script>
 @endsection

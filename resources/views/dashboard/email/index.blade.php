@@ -12,7 +12,7 @@
     <div class="main-content">
         <div class="page-header no-gutters">
             <div class="row align-items-md-center">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="media m-v-10">
                         <div class="avatar avatar-cyan avatar-icon avatar-square">
                             <i class="anticon anticon-mail"></i>
@@ -23,8 +23,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="text-md-right m-v-10">
+
+                        <a href="{{ route('email.newsletter') }}" class="btn btn-default">
+                            <i class="anticon anticon-mail"></i> Quick Newsletter
+                        </a>
                         <a href="{{ route('email.create') }}" class="btn btn-default">
                             <i class="anticon anticon-mail"></i> New Email
                         </a>
@@ -63,7 +67,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <p class="mb-0">{{ $email->private?'Private':'Mail List' }}</p>
+                                                    <p class="mb-0">{{ $email->private?'Private':'Bulk' }}</p>
                                                     @if($email->private)
                                                         <small class="text-muted">{{ $email->recipient }}</small>
                                                     @endif

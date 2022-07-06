@@ -62,6 +62,16 @@
                 </a>
             </li>
 
+            <li class="nav-item dropdown {{ @$sidenav['groups'] }}">
+                <a href="{{ route('groups.index') }}">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-usergroup-add"></i>
+                    </span>
+                    <span class="title">Groups</span>
+
+                </a>
+            </li>
+
             <li class="nav-item dropdown {{ @$sidenav['tasks'] }}">
                 <a href="{{ route('tasks') }}">
                     <span class="icon-holder">
@@ -72,15 +82,18 @@
                 </a>
             </li>
 
-            <li class="nav-item dropdown {{ @$sidenav['automate'] }}">
-                <a href="{{ route('automate') }}">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-control"></i>
-                    </span>
-                    <span class="title">Automate</span>
+            {{--
+                <li class="nav-item dropdown {{ @$sidenav['automate'] }}">
+                    <a href="{{ route('automate') }}">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-control"></i>
+                        </span>
+                        <span class="title">Automate</span>
 
-                </a>
-            </li>
+                    </a>
+                </li>
+            --}}
+
 
             <li class="nav-item dropdown {{ @$sidenav['help'] }}">
                 <a href="#">

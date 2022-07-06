@@ -42,7 +42,7 @@
                                                 <select id="occurrence" class="form-control" name="occurrence_type" required>
                                                     <option value="once" {{ old('occurrence_type')==='once'?'selected':'' }}>Once</option>
                                                     <option value="daily" {{ old('occurrence_type')==='daily'?'selected':'' }}>Daily</option>
-                                                    <option value="automated" {{ old('occurrence_type')==='automated'?'selected':'' }}>Automated</option>
+                                                    {{-- <option value="automated" {{ old('occurrence_type')==='automated'?'selected':'' }}>Automated</option> --}}
                                                 </select>
                                             </div>
                                         </div>

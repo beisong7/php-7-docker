@@ -4,6 +4,7 @@
 namespace App\Services\Automate;
 
 
+use App\Models\GroupMember;
 use App\Models\Member;
 use App\Services\MailList\MailListService;
 use App\Traits\General\Utility;
@@ -89,5 +90,29 @@ class MemberService
 
     public static function lastItem($selection = ['email']){
         return Member::orderBy('id','desc')->select($selection)->first();
+    }
+
+    /**
+     * add a member to a group
+     * @param $member_id
+     * @param $group_id
+     */
+    public static function addMemberToGroup($member_id, $group_id){
+        $exist = GroupMember::where('group_id', $group_id)->where('member_id', $member_id)->first();
+        if(empty($exist)){
+            GroupMember::create(
+                [
+                    "group_id"=>$group_id,
+                    "member_id"=>$member_id,
+                ]
+            );
+        }
+    }
+
+    public static function removeMemberFromGroup($member_id, $group_id){
+        $exist = GroupMember::where('group_id', $group_id)->where('member_id', $member_id)->first();
+        if(!empty($exist)){
+            $exist->delete();
+        }
     }
 }

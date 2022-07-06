@@ -2,9 +2,9 @@
 <div class="header">
     <div class="logo logo-dark">
         <a href="#">
-            <img src="{{ url('img/logo.png') }}" alt="Logo" style="max-width: 130px" class="mt-2">
+            <img src="{{ url('img/logo.png') }}" alt="Logo" style="max-width: 50px" class="mt-2">
 
-            <img class="logo-fold mt-2" src="{{ url('img/favicon.png') }}" alt="Logo" style="margin-left: 15px">
+            <img class="logo-fold mt-2" src="{{ url('img/logo.png') }}" alt="Logo" style="margin-left: 15px; max-width: 50px">
         </a>
     </div>
     <div class="logo logo-white">

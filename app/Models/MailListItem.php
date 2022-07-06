@@ -14,6 +14,8 @@ class MailListItem extends Model
         'round',
     ];
 
+    public $timestamps = false;
+
     public function maillist(){
         return $this->belongsTo(MailList::class, 'mail_list_id', 'uuid');
     }

@@ -31,7 +31,7 @@
                                     }
 
                                     a {
-                                    color: #577F4D;
+                                    color: #E63812;
                                     text-decoration: none;
                                     }
 
@@ -54,8 +54,8 @@
                                     .button {
                                     display: inline-block;
                                     color: white;
-                                    background: #577F4D;
-                                    border: solid #577F4D;
+                                    background: #E63812;
+                                    border: solid #E63812;
                                     border-width: 10px 20px 8px;
                                     font-weight: bold;
                                     border-radius: 4px;
@@ -117,7 +117,7 @@
 
                                     .container .masthead {
                                     padding: 80px 0;
-                                    background: #577F4D;
+                                    background: #E63812;
 
                                     color: white;
                                     }
@@ -167,11 +167,6 @@
                                     <div class="" style="width: 30%">
                                     <img src='https://www.irecharge.ng/images/irechargenormallogo.svg' alt="logo" style="width: 100%">
                                     </div>
-
-                                    <br>
-                                    <h5 style="text-align: center">NIGERIAN YOUTH CHAMBERS OF COMMERCE</h5>
-                                    <h4 style="text-align: center">MEMBERSHIP</h4>
-
                                     </td>
                                     </tr>
                                     <tr>

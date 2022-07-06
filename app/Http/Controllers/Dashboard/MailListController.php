@@ -79,12 +79,26 @@ class MailListController extends Controller
         $email_id = $request->input('email_id');
 
         $mail_list['sunday'] = $request->input('sunday')==='on'?true:false;
+        $mail_list['sunday_run'] = false;
+
         $mail_list['monday'] = $request->input('monday')==='on'?true:false;
+        $mail_list['monday_run'] = false;
+
         $mail_list['tuesday'] = $request->input('tuesday')==='on'?true:false;
+        $mail_list['tuesday_run'] = false;
+
         $mail_list['wednesday'] = $request->input('wednesday')==='on'?true:false;
+        $mail_list['wednesday_run'] = false;
+
         $mail_list['thursday'] = $request->input('thursday')==='on'?true:false;
+        $mail_list['thursday_run'] = false;
+
         $mail_list['friday'] = $request->input('friday')==='on'?true:false;
+        $mail_list['friday_run'] = false;
+
         $mail_list['saturday'] = $request->input('saturday')==='on'?true:false;
+        $mail_list['saturday_run'] = false;
+
         $mail_list['active'] = false;
         $mail_list['round'] = 1;
         $mail_list['uuid'] = $this->makeUuid();
