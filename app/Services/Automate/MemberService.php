@@ -4,6 +4,7 @@
 namespace App\Services\Automate;
 
 
+use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\Member;
 use App\Services\MailList\MailListService;
@@ -40,10 +41,10 @@ class MemberService
                     $mail_lists = $data['mail_lists'];
                     if(is_array($mail_lists)){
                         foreach ($mail_lists as $list_key){
-                            $list = MailListService::find($list_key, 'import_key');
+                            $group = Group::where("unique_key", $list_key)->first();
                             // UPDATE THE ABOVE QUERY TO DB::RAW FOR PERFORMANCE
-                            if(!empty($list)){
-                                MailListService::addToList($list->uuid, $email, $first_name);
+                            if(!empty($group)){
+                                MemberService::addMemberToGroup($member->uuid, $group->uuid);
                             }
                         }
                     }
