@@ -72,7 +72,7 @@
 
 
                                                 </td>
-                                                <td>{{ $list->status }}</td>
+                                                <td>{{ $list->status }} | {{ $list->active?"running":"not running" }}</td>
                                                 <td class="text-right">
 
                                                     {{--

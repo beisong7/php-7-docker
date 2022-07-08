@@ -55,19 +55,23 @@ class NewsletterService
         $mldata['email_id'] = $email_id;
         $mldata['start_sending'] = $start_sending;
 
+//        dd($request->all());
+
         $mail_list = MailListService::create($request, $mldata);
         $selections = [];
 
-        //create groups into mail-list
+        //add groups into mail-list
         if(!empty($request->selection)){
             if(count($request->selection)>0){
                 $selections = $request->selection;
+
                 foreach ($selections as $item){
                     $group = Group::where('uuid', $item)->first();
                     if(!empty($group)){
                         //get members in group
                         foreach ($group->members as $member){
-                            $exist = MailListItem::where('email', $member->email)->first();
+                            $exist = MailListItem::where('email', $member->email)
+                                ->where('mail_list_id', $mail_list->uuid)->first();
                             if(empty($exist)){
                                 $mld['uuid'] = Utility::generateID();
                                 $mld['mail_list_id'] = $mail_list->uuid;
@@ -115,6 +119,6 @@ class NewsletterService
         }
 
         DB::commit();
-        return redirect()->route('email.index')->withMessage('New email item created');
+        return true;
     }
 }

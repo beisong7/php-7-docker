@@ -22,9 +22,7 @@ trait Mailer{
 
             });
         }catch (\Exception $e){
-//                dd($e->getMessage());
-            if(env('LHOST')){
-            }
+//            dd($e->getMessage());
         }
 
     }

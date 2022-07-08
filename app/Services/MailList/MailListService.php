@@ -58,14 +58,14 @@ class MailListService
         $mail_list['saturday'] = $request->input('saturday')==='on'?true:false;
         $mail_list['saturday_run'] = false;
 
-        $mail_list['active'] = false;
+        $start_sending = $data['start_sending'];
+        $mail_list['active'] = true;
+        $mail_list['status'] = $start_sending==='on'?'ongoing':'active';
         $mail_list['round'] = 1;
         $mail_list['uuid'] = Utility::generateID();
         $mail_list['admin_id'] = $request->user()->uuid;
         $mail_list['email_id'] = $email_id;
         $mail_list['title'] = $title;
-        $start_sending = $data['start_sending'];
-        $mail_list['status'] = $start_sending==='on'?'ongoing':'inactive';
         $mail_list['daily'] = $occurrence_type==='daily'?true:false;
         $mail_list['type'] = $occurrence_type;
         $mail_list['hour'] = $hour;

@@ -231,7 +231,7 @@ class EmailController extends Controller
         ]);
         $res = NewsletterService::createNewsletter($request);
         if($res){
-            return redirect()->route('email.index')->withMessage("New newsletter created");
+            return redirect()->route('maillist.index')->withMessage("New newsletter created");
         }
         return back()->withErrors(['Could not complete. Try again'])->withInput();
 

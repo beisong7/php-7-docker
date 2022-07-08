@@ -95,6 +95,8 @@ class ProcessMailController extends Controller
 
     private function runProcess($mail_lists, $type = null){
 
+
+
         $day = strtolower(date('l'));
 
         foreach ($mail_lists as $list){
@@ -115,7 +117,7 @@ class ProcessMailController extends Controller
                     try{
                         $this->mailService->processOne($recipient, $list);
                     }catch (\Exception $e){
-                        //dd($e->getMessage());
+//                        dd($e->getMessage());
                     }
                     $sent++;
                 }

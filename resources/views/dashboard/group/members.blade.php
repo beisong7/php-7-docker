@@ -2,6 +2,7 @@
     @foreach($members as $member)
         <tr class="remove{{ $member->uuid }}">
             <td>{{ $member->names }}</td>
+            <td>{{ $member->email }}</td>
             <td>
                 <a href="{{ route('group.remove.member', ['id'=>$group->uuid,'member_id'=>$member->uuid]) }}"
                    uuid="{{ $member->uuid }}"
